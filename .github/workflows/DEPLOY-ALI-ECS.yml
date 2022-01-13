@@ -1,0 +1,39 @@
+name: DEPLOY ALI ECS
+
+# 触发 workflow 的事件
+on:
+  push:
+    branches: [ main ]
+
+# 一个workflow由执行的一项或多项job
+jobs:
+  # 一个job任务，任务名为build
+  build:
+    # runs-on 指定job任务运行所需要的虚拟机环境(必填字段)
+    runs-on: ubuntu-latest
+    
+    # steps是每个Job的运行步骤，可以包含一个或多个步骤
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Use Node v10.x
+        uses: actions/setup-node@v1
+        with: 
+          node-version: "10.x"
+
+      - name: Install
+        run: |
+          npm install
+        env:
+          CI: true
+          
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.0.7
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ACCESS_TOKEN }}
+          ARGS: "-avz --delete"
+          SOURCE: "[Current File Dir]"
+          REMOTE_HOST: ${{ secrets.FTP_IP }}
+          REMOTE_USER: ${{ secrets.FTP_USERNAME }}
+          TARGET: "/usr/local/app/excelsplit-service/"
