@@ -7,7 +7,7 @@ on:
 
 # 一个workflow由执行的一项或多项job
 jobs:
-  # 一个job任务，任务名为build
+  # 任务名为build的job
   build:
     # runs-on 指定job任务运行所需要的虚拟机环境(必填字段)
     runs-on: ubuntu-latest
@@ -21,7 +21,12 @@ jobs:
         uses: actions/setup-node@v1
         with: 
           node-version: "10.x"
-          
+
+  # 任务名为deploy的job
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Deploy Aliyun
         uses: easingthemes/ssh-deploy@v2.0.7
         env:
