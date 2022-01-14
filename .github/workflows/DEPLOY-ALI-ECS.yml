@@ -15,25 +15,19 @@ jobs:
     # steps是每个Job的运行步骤，可以包含一个或多个步骤
     steps:
       - name: Checkout code
-        uses: actions/checkout@main
+        uses: actions/checkout@v2
 
       - name: Use Node v10.x
         uses: actions/setup-node@v1
         with: 
           node-version: "10.x"
-
-      - name: Install
-        run: |
-          npm install
-        env:
-          CI: true
           
-      - name: Deploy
+      - name: Deploy Aliyun
         uses: easingthemes/ssh-deploy@v2.0.7
         env:
-          REMOTE_HOST: ${{ secrets.FTP_IP }}
-          REMOTE_USER: ${{ secrets.FTP_USERNAME }}
-          REMOTE_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          REMOTE_HOST: ${{ secrets.SERVER_IP }}
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
+          REMOTE_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          ARGS: "-avz --delete"
           SOURCE: "/"
           TARGET: "/usr/local/app/excelsplit-service/"
-          AFTER_COMMAND: 'npm install && forever restart app.js'
