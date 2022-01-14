@@ -3,7 +3,7 @@ name: DEPLOY ALI ECS
 # 触发 workflow 的事件
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 # 一个workflow由执行的一项或多项job
 jobs:
@@ -11,26 +11,23 @@ jobs:
   build:
     # runs-on 指定job任务运行所需要的虚拟机环境(必填字段)
     runs-on: ubuntu-latest
-    
+
     # steps是每个Job的运行步骤，可以包含一个或多个步骤
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Use Node v10.x
-        uses: actions/setup-node@v1
-        with: 
-          node-version: "10.x"
+      #- name: Use Node v10.x
+      #  uses: actions/setup-node@v1
+      #  with:
+      #    node-version: "10.x"
 
-  # 任务名为deploy的job
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Deploy Aliyun
-        uses: easingthemes/ssh-deploy@v2.0.7
+        uses: appleboy/scp-action@master
         env:
-          REMOTE_HOST: ${{ secrets.SERVER_IP }}
-          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
-          REMOTE_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          ARGS: "-avz --delete"
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          source: "/"
+          target: "/usr/local/app/excelsplit-service/"
