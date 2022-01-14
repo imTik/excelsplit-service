@@ -24,7 +24,7 @@ jobs:
 
       - name: Deploy Aliyun
         uses: appleboy/scp-action@master
-        env:
+        with:
           host: '120.77.86.99'
           username: 'root'
           password: 'Aa123456.'
