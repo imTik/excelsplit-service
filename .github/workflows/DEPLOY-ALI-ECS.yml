@@ -29,5 +29,5 @@ jobs:
           REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
           REMOTE_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           ARGS: "-avz --delete"
-          SOURCE: "/"
-          TARGET: "/usr/local/app/excelsplit-service/"
+          SOURCE: "/usr/local/app/excelsplit-service/"
+          TARGET: "/"
