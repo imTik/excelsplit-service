@@ -23,7 +23,7 @@ jobs:
       #    node-version: "10.x"
 
       - name: Deploy Aliyun
-        uses: appleboy/ssh-deploy@v2.1.6
+        uses: easingthemes/ssh-deploy@v2.1.6
         env:
           REMOTE_HOST: ${{ secrets.SERVER_IP }}
           REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
