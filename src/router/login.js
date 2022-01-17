@@ -50,12 +50,17 @@ router.post('/login', async function (ctx, next) {
     }
     if (!password) {
       throw '请输入密码';
-    };
+    }
 
     const _querySQL = `SELECT * FROM user WHERE phone = ${phone}`;
-    const _queryResult = await querySQL(_querySQL);
-
-    ctx.body = _queryResult; //resFactory('登录成功');
+    const userInfo = await querySQL(_querySQL);
+    if (userInfo.length === 0) {
+      throw '-4';
+    }
+    if (userInfo.password !== password) {
+      throw '-5';
+    }
+    ctx.body = resFactory('登录成功');
   } catch (e) {
     ctx.body = resFactory(e);
   }
