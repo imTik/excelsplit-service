@@ -6,7 +6,7 @@ const FastTime = require('../utils/FastTime');
 const fastTime = new FastTime();
 
 router.get('/', (ctx) => {
-  ctx.body = resFactory('Hello World');
+  ctx.body = resFactory('Hello World!');
 });
 
 // 注册接口
