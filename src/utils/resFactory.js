@@ -1,6 +1,6 @@
 const errorCode = require('../config/errorCode');
 
-function resFactory(code) {
+function resFactory(code, info) {
   code = code.toString();
   let msg = '';
   if (!errorCode[code]) {
@@ -10,7 +10,7 @@ function resFactory(code) {
   }
   let responseMsg = {
     code,
-    message: msg || errorCode[code],
+    message: info || errorCode[code],
   };
   return responseMsg;
 }

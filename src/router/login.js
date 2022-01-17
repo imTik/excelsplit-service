@@ -58,11 +58,12 @@ router.post('/login', async function (ctx, next) {
     if (userInfo.length === 0) {
       throw '-4';
     }
-    ctx.body = userInfo;
-    // if (userInfo.password !== password) {
-    //   throw '-5';
-    // }
-    // ctx.body = resFactory('登录成功');
+
+    if (userInfo[0].password !== password) {
+      throw '-5';
+    }
+
+    ctx.body = resFactory('200', userInfo[0]);
   } catch (e) {
     ctx.body = resFactory(e);
   }
