@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           # password: ${{ secrets.SERVER_PASSWORD }}
           key: ${{ secrets.SERVER_PRIVATE_KEY }}
-          # port: ${{ secrets.SERVER_PORT }}
+          port: ${{ secrets.SERVER_PORT }}
           source: "./"
           target: "/usr/local/app/excelsplit-service/"
       
