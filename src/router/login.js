@@ -41,4 +41,12 @@ router.post('/register', async function (ctx, next) {
   }
 });
 
+router.post('/login', async function (ctx, next) {
+  try {
+    ctx.body = resFactory('登录成功');
+  } catch (e) {
+    ctx.body = resFactory(e);
+  }
+});
+
 module.exports = router.routes();
