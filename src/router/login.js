@@ -41,6 +41,7 @@ router.post('/register', async function (ctx, next) {
   }
 });
 
+// 登录接口
 router.post('/login', async function (ctx, next) {
   try {
     const { phone, password } = ctx.params;
@@ -57,10 +58,11 @@ router.post('/login', async function (ctx, next) {
     if (userInfo.length === 0) {
       throw '-4';
     }
-    if (userInfo.password !== password) {
-      throw '-5';
-    }
-    ctx.body = resFactory('登录成功');
+    ctx.body = userInfo;
+    // if (userInfo.password !== password) {
+    //   throw '-5';
+    // }
+    // ctx.body = resFactory('登录成功');
   } catch (e) {
     ctx.body = resFactory(e);
   }
