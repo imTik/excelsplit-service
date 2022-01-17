@@ -1,6 +1,8 @@
 const errorCode = require('../config/errorCode');
+const FastTime = require('./FastTime');
+const fastTime = new FastTime();
 
-function resFactory(code, info) {
+function resFactory(code, info = null) {
   code = code.toString();
   let msg = '';
   if (!errorCode[code]) {
@@ -10,7 +12,9 @@ function resFactory(code, info) {
   }
   let responseMsg = {
     code,
-    message: info || errorCode[code],
+    message: msg || errorCode[code],
+    result: info,
+    responseTime: fastTime.getDate(),
   };
   return responseMsg;
 }

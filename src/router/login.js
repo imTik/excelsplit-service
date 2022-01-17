@@ -63,6 +63,7 @@ router.post('/login', async function (ctx, next) {
       throw '-5';
     }
 
+    userInfo[0].created_time = fastTime.format(userInfo[0].created_time);
     ctx.body = resFactory('200', userInfo[0]);
   } catch (e) {
     ctx.body = resFactory(e);
