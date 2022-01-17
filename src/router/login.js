@@ -53,8 +53,9 @@ router.post('/login', async function (ctx, next) {
     };
 
     const _querySQL = `SELECT * FROM user WHERE phone = ${phone}`;
+    const _queryResult = await querySQL(_querySQL);
 
-    ctx.body = _querySQL; //resFactory('登录成功');
+    ctx.body = _queryResult; //resFactory('登录成功');
   } catch (e) {
     ctx.body = resFactory(e);
   }
