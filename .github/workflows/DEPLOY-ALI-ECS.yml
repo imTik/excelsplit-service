@@ -27,8 +27,8 @@ jobs:
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
-          # password: ${{ secrets.SERVER_PASSWORD }}
-          key: ${{ secrets.SERVER_SSH }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          # key: ${{ secrets.SERVER_SSH }}
           port: ${{ secrets.SERVER_PORT }}
           source: "./"
           target: "/usr/local/app/excelsplit-service/"
