@@ -43,7 +43,18 @@ router.post('/register', async function (ctx, next) {
 
 router.post('/login', async function (ctx, next) {
   try {
-    ctx.body = resFactory('登录成功');
+    const { phone, password } = ctx.params;
+
+    if (!phone) {
+      throw '请输入手机号码';
+    }
+    if (!password) {
+      throw '请输入密码';
+    };
+
+    const _querySQL = `SELECT * FROM user WHERE phone = ${phone}`;
+
+    ctx.body = _querySQL; //resFactory('登录成功');
   } catch (e) {
     ctx.body = resFactory(e);
   }
